@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a map-based web application built with React and Vite, utilizing Leaflet for interactive mapping capabilities. The project is a modern, lightweight single-page application that displays interactive maps in the browser. It was initially bootstrapped with Create React App but has been migrated to use Vite as the build tool for improved performance and developer experience.
 
-## Available Scripts
+# User Preferences
 
-In the project directory, you can run:
+Preferred communication style: Simple, everyday language.
 
-### `npm start`
+# System Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Frontend Architecture
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Build Tool: Vite**
+- The application uses Vite instead of the traditional Create React App webpack setup
+- Vite provides faster hot module replacement (HMR) and optimized builds
+- Configuration is minimal and focused on React plugin integration
+- Development server runs on port 5000 with host binding to 0.0.0.0 for accessibility in containerized environments
 
-### `npm test`
+**UI Framework: React 18.2 with TypeScript**
+- Component-based architecture using modern React patterns
+- Entry point is `/src/main.tsx` as specified in the HTML file
+- Uses ES modules (type: "module" in package.json)
+- Strict TypeScript configuration for type safety
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Mapping Library: Leaflet + React Leaflet**
+- Leaflet 1.9.3 provides the core mapping functionality
+- React Leaflet 4.2.1 wraps Leaflet in React-friendly components
+- CSS is loaded via CDN from unpkg.com for Leaflet styles
+- Enables interactive map features like panning, zooming, and marker placement
 
-### `npm run build`
+**State Management: TanStack Query (React Query)**
+- React Query 5.0+ is included for server state management
+- Handles data fetching, caching, and synchronization
+- Provides efficient data management without the need for Redux or similar global state libraries
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Design Patterns
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Module System**
+- ES6 modules throughout the codebase
+- Vite handles module bundling and tree-shaking
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Development vs Production**
+- Development mode uses Vite's dev server with HMR
+- Production builds are optimized and output to `/build` folder
+- Static assets are served from `/public` directory
 
-### `npm run eject`
+## Deployment Considerations
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Server Configuration**
+- Vite dev server configured to accept all hosts for deployment flexibility
+- Suitable for Docker containers and cloud platforms
+- Port 5000 is the default development port
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Progressive Web App (PWA) Ready**
+- Includes manifest.json for PWA capabilities
+- Icons and theme configuration in place
+- Service worker integration possible but not currently implemented
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# External Dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Core Libraries
 
-## Learn More
+**React Ecosystem**
+- `react` (18.2.0) - UI library
+- `react-dom` (18.2.0) - DOM rendering
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Mapping**
+- `leaflet` (1.9.3) - Core mapping library
+- `react-leaflet` (4.2.1) - React bindings for Leaflet
+- Leaflet CSS loaded from unpkg.com CDN
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Data Management**
+- `@tanstack/react-query` (5.0+) - Async state management and data fetching
 
-### Code Splitting
+## Development Tools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Build & Development**
+- `vite` (5.0+) - Build tool and dev server
+- `@vitejs/plugin-react` (4.2+) - React integration for Vite
+- `typescript` (5.0+) - TypeScript compiler
+- `@types/react`, `@types/react-dom`, `@types/leaflet` - Type definitions
 
-### Analyzing the Bundle Size
+## External Services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**CDN Resources**
+- Leaflet CSS served from unpkg.com CDN with integrity checking
+- No backend API currently configured (though React Query suggests future API integration)
 
-### Making a Progressive Web App
+## Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- No database integration currently present
+- No authentication/authorization system implemented
+- Application is frontend-only with OpenStreetMap Nominatim API integration via React Query
+- No environment-specific configuration files detected (may need .env for API keys or map service tokens)
 
-### Advanced Configuration
+# Recent Changes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**November 30, 2025**
+- Migrated from Create React App to Vite for faster development builds
+- Replaced axios with TanStack Query (useQuery) for data fetching
+- Added loading and error states to location search
+- Removed legacy CRA dependencies (react-scripts, testing libraries, axios)
+- Upgraded to TypeScript with strict type checking
+- Added proper type definitions for Leaflet, React, and API responses
+- Converted all source files from .jsx to .tsx
